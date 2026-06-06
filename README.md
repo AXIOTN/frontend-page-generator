@@ -91,66 +91,7 @@
 | 橙色系 | 活力、热情 | 运动应用、社交平台 |
 | 灰色系 | 简约、专注 | 工具类应用、后台管理 |
 
-## 常见陷阱与解决方案
 
-### 1. CSS 与 Tailwind 冲突（高优先级）
-
-**问题**: 全局 CSS 重置会覆盖 Tailwind 的 preflight，导致布局混乱。
-
-```css
-/* ❌ 错误 - 会导致 Tailwind 样式失效 */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Custom Font', sans-serif;
-  line-height: 1.6;
-}
-```
-
-**解决**: 不要使用全局 CSS 重置，Tailwind 自带 preflight。只写 Tailwind 无法表达的自定义样式。
-
-```css
-/* ✅ 正确 - 只写 Tailwind 无法表达的样式 */
-.text-gradient {
-  background: linear-gradient(135deg, var(--tw-gradient-from), var(--tw-gradient-to));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-```
-
-### 2. CDN 依赖加载问题
-
-**问题**: 多个外部 CDN（Tailwind、Alpine、GSAP、Lucide）同时加载可能导致时序问题。
-
-**解决**:
-- 使用 `defer` 属性加载 Alpine.js
-- 将 Lucide 初始化放在 Alpine 的 `init()` 方法中
-- 考虑将关键依赖本地化
-
-### 3. Tailwind 配置复杂度
-
-**问题**: 过于复杂的 Tailwind 配置（自定义 animation/keyframes）可能导致解析错误。
-
-**解决**: 保持配置简洁，复杂动画使用 GSAP 或自定义 CSS。
-
-### 4. Emoji 图标问题
-
-**问题**: Emoji 在不同平台显示不一致，无法控制大小、颜色。
-
-**解决**: 使用三级图标优先策略：
-1. 本地图标库（icons/ 目录）
-2. Lucide 图标库
-3. AI 自动生成 SVG
-
-### 5. Windows 文件权限错误
-
-**问题**: Windows 上删除目录时可能遇到 "另一个程序正在使用此文件" 错误。
-
-**解决**: 使用 try-except 包装，或跳过删除直接覆盖。
 
 ## 交付检查清单
 
