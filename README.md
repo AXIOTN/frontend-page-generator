@@ -1,5 +1,5 @@
 # frontend-page-generator
-# 前端页面生成器 (Frontend Page Generator)
+# 前端页面生成 (Frontend Page Generator)
 
 专业级前端页面生成技能，支持 React/Vue3/Next.js/Nuxt.js 等主流框架。包含 UI 设计规范、后端 API 对接、功能实现、动画效果四大模块。
 
